@@ -1,0 +1,5 @@
+a = input("string 1 : ")
+b = input("string 2 : ")
+c = set(a).intersection(set(b))
+print('common letters are : ')
+print(','.join(c))
