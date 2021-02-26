@@ -16,7 +16,19 @@ when no_data_found then
 dbms_output.put_line('NO such data exist with that id');
 end;
 /
+/*
+  1  create or replace procedure pc(n number)
+  2  is
+  3  cont customer_contact%ROWTYPE;
+  4  begin
+  5  select * into cont from customer_contact where cid = n;
+  6  dbms_output.put_line('name : '||cont.cfname||' clg : '||cont.clname||' email : '||cont.cemail);
+  7* end;
+
+i/p:exec pc(103);
+name : raj clg : vindula email : raj@gmail.com */
 3
+
 create table student(s_id number(10),s_name varchar(10),s_marks number(8));
 BEGIN
   insert into student values(201,'Nikhil',89);
