@@ -1,0 +1,25 @@
+create table student(id number,name varchar2(25),programme varchar2(25));
+create table diploma(id number,name varchar2(25));
+insert into student values(1,'ROHAN','DIPLOMA');
+insert into student values(2,'ANU','MA');
+insert into student values(3,'ROBERT','DIPLOMA');
+insert into student values(4,'TOM','BTECH');
+insert into student values(5,'SUNNY','DIPLOMA');
+declare
+  p_id student.id%type;
+  p_name student.name%type;
+  p_prog student.programme%type;
+  cursor P1 IS select id,name,programme from student;
+Begin 
+  open P1;
+  loop
+  fetch P1 into p_id,p_name,p_prog;
+  exit when P1%notfound;
+  if p_prog = 'DIPLOMA' then
+     insert into diploma values(p_id,p_name);
+  end if;
+  end loop;
+  close P1;
+end;
+select * from student;
+select * from diploma;

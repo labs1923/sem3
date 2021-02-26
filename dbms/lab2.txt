@@ -1,0 +1,30 @@
+select ename from emp order by salary;
+select * from EMP order by dept_no,job Desc
+select distinct job from EMP order by job Desc
+select * from EMP where mgr is not null;
+select * from emp where comm > salary;
+select ename from emp where job = 'CLERK' OR job = 'ANALYST' order by job desc;
+select ename from emp where salary>22000 and salary<45000; 
+create table emp_income(e_id,name,salary,commission) as select emp_no,ename,salary,comm from emp;
+create table Emp_data(Name, Gender, Post, Dept_in) as select  ename,gender,job,comm from emp;
+create table section(s_id numeric(4),s_name varchar(50));
+insert into section (s_id,s_name)  select dept_no,dname from department;
+Create table Relation(Ename varchar(50), Manager varchar(50), Dept_no number);
+alter table emp add age number;
+alter table depositor drop column custname;
+alter table emp_data add (Date_of_Birth date);
+rename section to office;
+rename relation to association;
+update emp set comm = 500 where job ='CLERK';
+update emp_income set salary = 50000  where e_id in (select emp_no from emp where job ='MANAGER');
+update emp_income set salary = salary+50000  where e_id in (select emp_no from emp where job ='SALESMAN');
+delete from emp_data where name in (select ename from emp where dept_no = 20);
+delete from association;
+delete from office;
+delete from emp_data where name = 'Martin';
+update emp set comm = comm+(comm/10) where gender ='F';
+drop table emp_income;
+drop table emp_data;
+drop table office;
+drop table association;
+

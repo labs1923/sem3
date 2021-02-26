@@ -1,0 +1,20 @@
+ create table employee (Emp_no varchar(50), E_name varchar(50), E_address varchar(50), E_ph_no number, Dept_no number, Dept_name varchar(50),join_date date, Designation varchar(50), Salary number);
+insert into employee values('1','Vamsi','Kolkata',9835748343,10,'Accounts','1-MAY-81','Manager',50000);
+insert into employee values('2','Ajay','Chennai',9283722742,20,'Finance','10-OCT-82','Clerk',40000);
+insert into employee values('3','Sampath','Lucknow',9837483284,10,'Sales','24-NOV-85','Salesman',60000);
+insert into employee values('4','Dhanush','Harayana',7393382922,30,'Accounts','3-DEC-81','Manager',45000);
+insert into employee values('5','Rakesh','Hampi',8638274822,20,'Research','8-JAN-83','It professor',30000);
+insert into employee values('6','Venkat','Delhi',6309438239,40,'Sales','17-DEC-81','President',50000);
+insert into employee values('7','Nikhil','Hyderabad',9382274828,10,'Finance','19-JAN-80','Analyst',25000);
+select emp_no,e_name from employee where Designation = 'Manager';
+select e.* from employee e , employee emp where e.salary > emp.salary and emp.designation = 'IT Professional';
+select e_name from employee where join_date>('01-JAN-81')  order by designation ;
+select e_name,(to_date('31-DEC-99', 'dd-mm-yy')
+       - to_date(join_date, 'dd-mm-yy')+to_date(sysdate, 'dd-mm-yy')
+       - to_date('01-JAN-00', 'dd-mm-yy'))/365 as EXPERIENCE ,salary/30  from employee;
+select e_name from employee where designation = 'Clerk' or designation = 'Analyst';
+select e_name from employee where join_date=('1-MAY-81') or join_date=('3-DEC-81') or join_date=('17-DEC-81') or join_date=('19-JAN-80 ') ;
+select e_name from employee where dept_no = 10 or dept_no = 20 ; 
+select e_name from employee where e_name like 'S%' ; 
+select e_name,substr(e_name,1,5) from employee where e_name like 'D%';
+select e_name from employee where not designation='President' and not designation='MGR'  order by salary ;

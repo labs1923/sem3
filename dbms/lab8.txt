@@ -1,0 +1,9 @@
+create table book (Book_id number, Bname varchar(50), Publisher_Name varchar(30),
+Pub_Year number, Price number, edition number, ISBN number(20));
+create table Author (book number(10),author varchar(20),publisher varchar2(20),ISBN number(20));
+create or replace view PubDetails as select Bname, Publisher_Name, Pub_Year, edition, ISBN from book;
+create or replace view BookAuthor as select Bname,author from book,author where book.ISBN = author.ISBN;
+create or replace view names as select bname,Publisher_Name from PubDetails;
+drop view PubDetails;
+drop view BookAuthor;
+drop view names;

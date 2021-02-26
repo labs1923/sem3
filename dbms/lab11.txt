@@ -1,0 +1,20 @@
+create table student(id number,name varchar2(25),programme varchar2(25));
+insert into student values(1,'ROHAN','DIPLOMA');
+insert into student values(2,'ANU','MA');
+insert into student values(3,'ROBERT','DIPLOMA');
+insert into student values(4,'TOM','BTECH');
+insert into student values(5,'SUNNY','DIPLOMA');
+create or replace trigger diplay_uodate_change
+before update or delete
+on student
+for each row
+when(new.id>0)
+Declare
+n varchar(50);
+o varchar(50);
+Begin
+n := :new.programme;
+o := :old.programme;
+dbms_output.put_line('old program : '||o||' new program : '||n);
+End;
+update student set programme = 'MA' where id = 1;

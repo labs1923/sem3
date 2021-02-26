@@ -1,0 +1,49 @@
+create table Department (Dept_no numeric(2),Dname varchar(15),Location varchar(12));
+INSERT INTO Department VALUES(10,'ACCOUNTING','NEW YORK');
+INSERT INTO Department VALUES(20,'RESEARCH','DALLAS');
+INSERT INTO Department VALUES(30,'SALES','CHICAGO');
+INSERT INTO Department VALUES(40,'MARKETING','BOSTON');
+create table Emp (EMp_no numeric(4),Ename varchar(20),Gender char(1),Job varchar(12),Mgr numeric(4),Hiredate date,Salary numeric(8),comm numeric(8),Dept_no numeric(2));
+INSERT INTO Emp VALUES(7369	,'Smith' ,'M','CLERK'	 ,7902,'17-DEC-80',8000	 ,NULL	,20);
+INSERT INTO Emp VALUES(7499	,'Allen' ,'F','SALESMAN' ,7698,'20-FEB-81',16000 ,3000	,30);
+INSERT INTO Emp VALUES(7521	,'Ward'	 ,'M','SALESMAN' ,7698,'22-FEB-81',12500 ,5000	,30);
+INSERT INTO Emp VALUES(7566	,'Jones' ,'F','MANAGER'	 ,7839,'02-APR-81',29750 ,NULL	,20);
+INSERT INTO Emp VALUES(7654	,'Martin','M','SALESMAN' ,7698,'28-SEP-81',12500 ,14000 ,30);
+INSERT INTO Emp VALUES(7698	,'Blake' ,'M','MANAGER'	 ,7839,'01-MAY-81',28500 ,NULL	,30);
+INSERT INTO Emp VALUES(7782	,'Clark' ,'M','MANAGER'	 ,7839,'09-JUN-81',24500 ,NULL	,10);
+INSERT INTO Emp VALUES(7788	,'Scott' ,'M','ANALYST'	 ,7566,'09-DEC-82',30000 ,NULL	,20);
+INSERT INTO Emp VALUES(7839	,'King'	 ,'M','PRESIDENT',NULL,'17-NOV-81',50000 ,NULL	,10);
+INSERT INTO Emp VALUES(7844	,'Turner','M','SALESMAN' ,7698,'08-SEP-81',15000 ,NULL	,30);
+INSERT INTO Emp VALUES(7876	,'Adams' ,'M','CLERK'	 ,7788,'12-JAN-83',11000 ,NULL	,20);
+INSERT INTO Emp VALUES(7900	,'James' ,'M','CLERK'	 ,7698,'03-DEC-81',95000 ,NULL	,30);
+INSERT INTO Emp VALUES(7902	,'Ford'	 ,'M','ANALYST'	 ,7566,'03-DEC-81',30000 ,NULL	,20);
+INSERT INTO Emp VALUES(7934	,'Miller','F','CLERK'	 ,7782,'23-JAN-82',13000 ,NULL	,10);
+select * from emp;
+select * from Department;
+select job from emp where dept_no =10 intersect select job from emp where dept_no =20;
+select job from emp where dept_no =10 union select job from emp where dept_no =20;
+select job from emp where dept_no =10  minus select job from emp where dept_no =20;
+select e.ename from emp e,emp e1 where e.dept_no = e1.dept_no and e.mgr = e1.emp_no and e1.job = 'MANAGER' ;
+delete from emp where emp_no in( select emp_no from emp 
+natural join department where hiredate<('31-DEC-82') and location in ('NEW YORK','CHICAGO'));
+select * from emp natural join department where hiredate<('31-DEC-82') and dname in ('ACCOUNTING','SALES') and job <> 'CLERK';
+select ename,job,dname,location from emp natural join department where job = 'MANAGER';
+select e.ename,e1.ename as manager from emp e,emp e1 where e.mgr = e1.emp_no and e1.ename = 'Jones';
+select emp_no,salary from emp where  ename = 'Ford' and salary = (select max(salary) from emp group by dept_no having dept_no = (select dept_no from emp where ename = 'Ford'));
+select ename,job,salary,dname from emp natural join department where job <> 'CLERK' order by salary ;
+select ename from emp where mgr is NULL;
+select ename from emp where salary = (select max(salary) from emp);
+select ename from emp where salary = 
+(select max(salary) from emp where salary not in (select max(salary) from emp));
+select ename from emp where salary = (select (max(salary)+min(salary))/2 from emp);
+select count(*),dept_no from emp group by dept_no having count(*) > 3;
+select dname from department where dept_no in (select dept_no from emp group by dept_no having count(*) >= 3);
+select ename from emp where job = 'MANAGER' and salary > (select avg(salary) from emp);
+select * from emp e where (select count(*) from emp b  where e.salary<b.salary) < 5 order by salary DESC;
+select * from emp e where (select count(*) from emp b  where e.salary>b.salary) < 5 order by salary;
+select e.ename,e.job,dname,e1.ename as manager,e.salary from emp e natural join department
+left join emp e1
+on e1.emp_no = e.mgr  order by e.salary;
+select e.ename,e.job,dname,e1.ename as manager,e.salary from emp e natural join department 
+left join emp e1
+on e1.emp_no = e.mgr order by dname,e.salary;

@@ -1,0 +1,27 @@
+create table sailor ( sid integer not null primary key,
+                      sname varchar(50) not null,
+                      srating integer not null,
+                      sage real not null);
+desc sailor;
+insert into sailor values(22 ,'Dustin'  , 7, 45);
+insert into sailor values(29 ,'Brutus'  , 1, 33);
+insert into sailor values(31 ,'Lubber'  , 8, 55.5);
+insert into sailor values(32 ,'Andy'    , 8, 25.5);
+insert into sailor values(58 ,'Rusty'   ,10, 35);
+insert into sailor values(64 ,'Horatio' , 7, 35);
+insert into sailor values(71 ,'Zorba'   ,10, 16);
+insert into sailor values(74 ,'Horatio' , 9, 40);
+insert into sailor values(85 ,'Art'     , 3, 25.5);
+insert into sailor values(95 ,'Bob'     , 3, 63.5);
+select * from sailor;
+select distinct sname from sailor;
+select sname,sage from sailor where sage = (select min(sage) from sailor);
+select sid from sailor where srating > some(select srating from sailor where sname = 'Bob');
+select sid from sailor where srating > all(select srating from sailor where sname = 'Bob');
+select count(distinct sname) from sailor;
+select avg(sage) from sailor;
+select avg(sage),srating from sailor group by srating;
+select avg(sage),srating from sailor group by srating having count(srating) >=2;
+select * from sailor order by sname;
+select sid from sailor where srating = (Select max(srating) from sailor);
+select sname,sage from sailor where sage = (Select max(sage) from sailor);

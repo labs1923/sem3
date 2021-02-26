@@ -1,0 +1,12 @@
+select avg(salary),min(salary),max(salary),sum(salary),count(salary),count(*) from emp
+select sum(salary) from emp;
+select avg(salary) from emp group by job having job = 'CLERK';
+select avg(salary),job from emp group by job having job = 'MANAGER' or job = 'SALESMAN' ;
+select ename from emp where salary*12 = (select max(salary*12) from emp);
+select ename from emp where salary = (select min(salary) from emp);
+select count(emp_no) from emp where salary > (select avg(salary) from emp);
+select * from department where dept_no = (select dept_no from emp group by dept_no having count(*) = (select max(count(*)) from emp group by dept_no)) ;
+select sum(salary),dept_no from emp group by dept_no;
+select sum(salary),avg(salary),job from emp group by job;
+select dname from department where dept_no = (select dept_no from emp group by dept_no having sum(salary) = (select max(sum(salary)) from emp group by dept_no)) ;
+select dname from department where dept_no = (select dept_no from emp group by dept_no having sum(salary) = (select min(sum(salary)) from emp group by dept_no)) ;

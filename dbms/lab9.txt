@@ -1,0 +1,141 @@
+1
+create table customer_contact (cid number ,cfname varchar(20),clname varchar(20),cemail varchar(20));
+insert into customer_contact values(101,'nikhil','vegulla','nikhil@gmail.com');
+insert into customer_contact values(102,'vamsi','valivetti','vamsikrish@gmail.com');
+insert into customer_contact values(103	,'sampath',	'vindula','sampath118@gmail.com');
+insert into customer_contact values(104,'sai','kaushik','rkauhik@gmail.com');
+insert into customer_contact values(105,'ajay','velangi','ajaykumar@gmail.com');
+declare
+id number :=&id;
+c customer_contact%rowtype;
+begin
+select * into c from customer_contact where id=cid;
+dbms_output.put_line('FirstName : '|| c.cfname|| '   LastName : '||c.clname|| '  Email id : '|| c.cemail);
+exception 
+when no_data_found then
+dbms_output.put_line('NO such data exist with that id');
+end;
+/
+3
+create table student(s_id number(10),s_name varchar(10),s_marks number(8));
+BEGIN
+  insert into student values(201,'Nikhil',89);
+  insert into student values(202,'vamsi',97);
+  insert into student values(203,'sampath',89);
+  insert into student values(204,'kaushik',79);
+  insert into student values(205,'ajay',75);
+  insert into student values(206,'dhanush',67);
+  insert into student values(207,'saketh',69);
+  insert into student values(208,'venky',59);
+  insert into student values(209,'raj',45);
+  insert into student values(210,'kumar',32);
+  END;
+   /
+declare
+id number := &id;  
+ marks number;  
+not_found exception; 
+begin    
+select s_marks into marks from student where s_id = id;  
+CASE  
+when marks>90 then dbms_output.put_line('excellent'); 
+ when marks >80 then dbms_output.put_line('very good'); 
+ when marks >70 then dbms_output.put_line('good'); 
+ when marks >60 then dbms_output.put_line('fair');  
+ when marks >50 then dbms_output.put_line('poor'); else  
+ dbms_output.put_line('Fail');  
+ end case;
+ EXCEPTION 
+ WHEN no_data_found THEN       
+ dbms_output.put_line('Table doesnt have that data'); 
+end;   
+/
+5
+create or replace function c_area (r number)
+return number is 
+area float;
+begin
+area := 3.14*r*r;
+return area;
+end;
+/
+create or replace function c_perimeter (r number)
+return number is 
+perimeter float;
+begin
+perimeter := 2*3.14*r;
+return perimeter;
+end;
+/
+declare
+radius number := &radius;
+begin
+dbms_output.put_line('The area and perimeter of the circle with radius '||radius||' is '||c_area(radius)||' and '||c_perimeter(radius));
+end;
+/
+2
+insert into employee values(301,'NIKHIL',150,80,5000);
+insert into employee values(302,'KRISHNA',50,20,10000);
+insert into employee values(303,'SAKETH',120,150,2000);
+insert into employee values(301,'RAKESH',100,85,8500);
+insert into employee values(301,'SAMPATH',90,120,10000);
+create or replace procedure proc(id number)
+is
+bonus employee.target%TYPE;
+emp employee%ROWTYPE;
+begin
+select target into bonus from employee where e_id=id;
+select * into emp from employee where e_id=id;
+if(emp.e_sales > emp.target) then
+update employee set salary=salary+bonus where e_id=id;
+else
+null;
+end if;
+exception
+when no_data_found then
+dbms_output.put_line('NO data found');
+end;
+/
+4
+create or replace procedure namereturn(id in number, name out varchar)
+is 
+begin
+select e_name into name from employee where e_id=id;
+end;
+/
+
+declare 
+a number :=&a;
+name varchar(20);
+begin
+namereturn(a,name);
+dbms_output.put_line(name);
+end;
+/
+6
+create or replace procedure total
+is 
+total number;
+begin
+select count(*) into total from employee;
+dbms_output.put_line('Total number of Employees : '|| total);
+end;
+/
+
+create or replace function tot_func
+return number
+is 
+total number;
+begin
+select count(*) into total from employee;
+return total;
+end;
+/
+
+declare 
+ e number;
+begin 
+e:=tot_func();
+dbms_output.put_line('Total number of Employees : '|| tot_func);
+end;
+/
