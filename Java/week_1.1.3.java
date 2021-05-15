@@ -4,7 +4,7 @@
 public class Main
 {
     public static int fib_rec(int x){
-        return (x == 0 || x == 1)?x:fib_rec(x-1)+fib_rec(x-2);
+        return (x == 0 || x == 1)?x:fib_rec(x-1)+fib_rec(x-2); //Using Terinary Operator.
     }
     
 	public static void main(String[] args) {
