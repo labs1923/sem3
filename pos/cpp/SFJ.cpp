@@ -1,6 +1,10 @@
 #include<iostream>
-using namespace std;
 #include<iomanip>
+void swap(int x,int y);
+
+int s,a[100],i,j,k,w[100],c[100],t[100],b[100],n,total_tat=0,total_wt=0;
+char p[100];
+using namespace std;
 int main(){
     int s,a[100],i,j,w[100],c[100],t[100],b[100],n,total_tat=0,total_wt=0;
     char p[100];
@@ -14,7 +18,7 @@ int main(){
         cout<<"Enter brust time of "<< p[i]<<" ";
         cin>>b[i];
     }
-    for(i=0;i<n;i++){
+     for(i=0;i<n;i++){
         cout<<"Enter arrival time of "<< p[i]<<" ";
         cin>>a[i];
     }
@@ -27,42 +31,41 @@ int main(){
             b[j] = b[j+1]+b[j]-(b[j+1]=b[j]);
             p[j] = p[j+1]+p[j]-(p[j+1]=p[j]);   
         }
-    }
+    }     
     for(i=0;i<n;i++){
-        if(a[i]==a[i+1]){
-            if(b[i]>b[i+1]){
-                a[j] = a[j+1]+a[j]-(a[j+1]=a[j]);
-                p[j] = p[j+1]+p[j]-(p[j+1]=p[j]);  
-            }
-        }
+        c[i]=0;
+        t[i]=0;
+        w[i]=0;
     }
     c[0]=b[0];
     t[0] = c[0]-a[0];
     w[0]=t[0]-b[0];
-    for(i=0;i<n;i++){
-    if(c[i-1]>a[i]){
-        for(i=0;i<n;i++)
-        {
-            for(j=0;j<n-i;j++)
-                if(b[j+1]<b[j])
-            {
-                a[j] = a[j+1]+a[j]-(a[j+1]=a[j]);
-                b[j] = b[j+1]+b[j]-(b[j+1]=b[j]);
-                p[j] = p[j+1]+p[j]-(p[j+1]=p[j]);   
-            }
-        }
-        for(i=1;i<n;i++){
-            c[i]=c[i-1]+b[i];
-            t[i] = c[i]-a[i];
-            w[i]=t[i]-b[i];
+    for(i=1;i<n;i++){
+        if(c[i-1]>a[i]){
+                for(k=i;i<n;i++)
+                {
+                    for(j=i;j<n-k;j++)
+                    if(b[j+1]<b[j])
+                    {
+                        a[j] = a[j+1]+a[j]-(a[j+1]=a[j]);
+                        b[j] = b[j+1]+b[j]-(b[j+1]=b[j]);
+                        p[j] = p[j+1]+p[j]-(p[j+1]=p[j]);   
+                    }
+                }
+                if(b[i]==b[i+1]){
+                    if(a[i]>a[i+1]){
+                        swap(b[i],b[i+1]);
+                        swap(a[i],a[i+1]);
+                        swap(p[i],p[i+1]);
+                    }
+                }           
         }
     }
-    else{
-        c[i]=a[i]+b[i];
-        t[i] = c[i]-a[i];
-        w[i]=t[i]-b[i];
-        }
-    };
+    for(i=1;i<n;i++){
+            c[i]= c[i-1]+b[i];
+            t[i] = c[i]-a[i];
+            w[i]=t[i]-b[i]; 
+    }
     cout<<"Process"<<setw(10)<<"AT"<<setw(10)<<"BT"<<setw(10)<<"CT"<<setw(10)<<"TAT"<<setw(10)<<"WT"<<endl;
 	cout<<string(70,'-')<<endl;
 	for(i=0;i<n;i++)
@@ -73,9 +76,20 @@ int main(){
 	}
     cout<<"GANTT CHART is:: \n";
     for(i=0;i<n;i++){
-        cout<<"P"<<p[i]<<"->";
+        cout<<"P"<<p[i]<<" ";
     }
     cout<<"\nTotal TURN AROUND TIME is "<<total_tat<<" and average is "<<(float)total_tat/n;
     cout<<"\nTotal WAITING TIME is "<<total_wt<<" and average is "<<(float)total_wt/n;
+
     return 0;
+}
+void swap(int x,int y)
+{
+ int z;
+ 
+ z=x;
+ x=y;
+ y=z;
+ cout<<" "<<x<<"   "<<y;
+ 
 }
