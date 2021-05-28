@@ -20,6 +20,7 @@ public class Week2_a{
                 System.out.println("*long");
         }catch(Exception e){
             System.out.println("Cant be fitted any where");
+            sc.next();
         }
         }
     }
