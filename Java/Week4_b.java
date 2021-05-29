@@ -10,25 +10,20 @@ class Week4_b{
     
     public static void main(String... args){
         double a = Double.parseDouble(args[0]),b = Double.parseDouble(args[1]);
-        Calculator obj1 = new Calculator(2,5);
-        System.out.println(obj1.powerInt());
-        Calculator obj2 = new Calculator(3,7);
-        System.out.println(obj2.powerInt());
-        Calculator obj3 = new Calculator(a,b);
-        System.out.println(obj3.powerInt());
-        System.out.println("The no of objects created are "+Calculator.count);
+        Calculator obj = new Calculator();
+        System.out.println(obj.powerInt(2,5));
+        System.out.println(obj.powerInt(3,7));
+        System.out.println(obj.powerInt(a,b));
+        System.out.println("The no of objects created are "+obj.count);
     }
 }
 
 class Calculator{
-static double base , power;
-static int count;
-    Calculator(double b ,double p){
-        base = b;
-        power = p;
+int count = 0;
+    Calculator(){
+       count++;
     }
-    static double powerInt(){
-        count++;
+    static double powerInt(double base ,double power){
         int ans = 1;
         for(int i = 0;i < power ; i++)
             ans *= base;
