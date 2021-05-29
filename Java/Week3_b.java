@@ -23,10 +23,6 @@ class Week3_b{
                 item_id[i] = sc.nextInt();
         
         int[][] table = new int[2025][2025];
-        //initialising the table to 0.
-        for(int i=0;i<2025;i++)
-            for(int j = 0 ; j < 2025 ; j++)
-                table[i][j] = '\0';
         
         //Entering the items sold into the table.
         System.out.println("Enter the no of items sold :");
