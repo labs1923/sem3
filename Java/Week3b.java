@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class 3b {
+public class Week3b {
     public static void main(String[] args) {
         int m,n,max,y=0,id=0,i,j;
         Scanner s =new Scanner(System.in);
