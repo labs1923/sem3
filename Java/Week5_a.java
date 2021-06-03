@@ -1,3 +1,4 @@
+/*Accept a String and a number „n‟ from user. Divide the given string into substrings each of size „n‟ and sort them lexicographically*/ 
 class DivisionString
 {
     static void divideString(String str, int n)
