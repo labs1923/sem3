@@ -32,4 +32,4 @@ If you want to add anything feel free to create an issue
 
 ## Contributing  
 This repository is contribution friendly. If you'd like to add or improve any algorithm or program for any question, your contribution is welcome!  
-Don't forget to follow [Contribution Guidelines](contributing.md) 😃 
+Don't forget to follow [Contribution Guidelines](CONTRIBUTING.md) 😃 
