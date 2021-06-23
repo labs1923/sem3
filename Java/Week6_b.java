@@ -1,4 +1,4 @@
-class Week62{
+class Week6_b{
     public static void main(String[] args){
         Figure_3D[] obj3D = new Figure_3D[4];
         obj3D [0] = new Cylinder();
@@ -39,6 +39,3 @@ class Cube extends Figure_3D{
         System.out.println("Volume of cube = " + (side*side*side));
     }
 }
-
-
-
