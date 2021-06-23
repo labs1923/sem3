@@ -1,4 +1,4 @@
-public class Week6a{
+public class Week6_a{
     public static void main(String[] args)
     {
         Cost c = new Cost();
